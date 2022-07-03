@@ -4,13 +4,11 @@ import "./Expenses.css";
 import ExpenseItem from "./ExpenseItem";
 
 const Expenses = (props) => {
-  //   const expenseItems = props.map((element) => {
-  //     return <ExpenseItem>{element}</ExpenseItem>;
-  //   });
   return (
     <div className="expenses">
-      {props.items.map((expense) => (
+      {props.items.map((expense, index) => (
         <ExpenseItem
+          key={index}
           title={expense.title}
           amount={expense.amount}
           date={expense.date}
