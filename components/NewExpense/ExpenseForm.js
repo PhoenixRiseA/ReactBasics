@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import "./ExpenseForm.css";
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -42,7 +42,12 @@ const ExpenseForm = () => {
       location: enteredLocation,
     };
 
-    console.log(expenseData);
+    // console.log(expenseData);
+    props.onSaveExpenseData(expenseData);
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
+    setEnteredLocation("");
   };
 
   return (
@@ -50,12 +55,17 @@ const ExpenseForm = () => {
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input id="title" type="text" name="title" onChange={titleHandler} />
+          <input
+            value={enteredTitle}
+            type="text"
+            name="title"
+            onChange={titleHandler}
+          />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
           <input
-            id="amount"
+            value={enteredAmount}
             type="text"
             name="amount"
             onChange={amountHandler}
@@ -65,7 +75,7 @@ const ExpenseForm = () => {
         <div className="new-expense__control">
           <label>Date</label>
           <input
-            id="date"
+            value={enteredDate}
             type="date"
             min="2019-01-01"
             max="2022-12-31"
@@ -75,7 +85,7 @@ const ExpenseForm = () => {
         <div className="new-expense__control">
           <label>Location</label>
           <input
-            id="location"
+            value={enteredLocation}
             type="text"
             name="location"
             onChange={locationHandler}
