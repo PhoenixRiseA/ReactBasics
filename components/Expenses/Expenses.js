@@ -17,18 +17,23 @@ const Expenses = (props) => {
     <div>
       <div className="expenses">
         <ExpensesFilter
-          value={filteredYear}
+          selected={filteredYear}
           onChangeFilter={filterChangeHandler}
         />
-        {props.items.map((expense) => (
-          <ExpenseItem
-            key={expense.id}
-            title={expense.title}
-            amount={expense.amount}
-            date={expense.date}
-            location={expense.location}
-          />
-        ))}
+        {props.items
+          .filter(
+            (filteredExpense) =>
+              filteredExpense.date.getFullYear().toString() === filteredYear
+          )
+          .map((expense) => (
+            <ExpenseItem
+              key={expense.id}
+              title={expense.title}
+              amount={expense.amount}
+              date={expense.date}
+              location={expense.location}
+            />
+          ))}
         {/* <ExpenseItem
         title={props.items[0].title}
         amount={props.items[0].amount}
