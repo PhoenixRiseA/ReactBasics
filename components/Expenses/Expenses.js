@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Expenses.css";
 // import Card from "../UI/Card";
-import ExpenseItem from "./ExpenseItem";
+import ExpensesList from "./ExpensesList";
 import ExpensesFilter from "./ExpensesFilter";
 
 const Expenses = (props) => {
@@ -16,24 +16,13 @@ const Expenses = (props) => {
     return filteredExpense.date.getFullYear().toString() === filteredYear;
   });
 
-  let expensesContent = <p>Add something</p>;
-
-  console.log(filteredExpenses.length);
   let addOneMore;
   if (filteredExpenses.length === 1) {
-    addOneMore = <p>List only has one item, Add more</p>;
-  }
-
-  if (filteredExpenses.length > 0) {
-    expensesContent = filteredExpenses.map((expense) => (
-      <ExpenseItem
-        key={expense.id}
-        title={expense.title}
-        amount={expense.amount}
-        date={expense.date}
-        location={expense.location}
-      />
-    ));
+    addOneMore = (
+      <h3 className="expenses-list__fallback">
+        List only has one item, Add more
+      </h3>
+    );
   }
   return (
     <div>
@@ -42,8 +31,8 @@ const Expenses = (props) => {
           selected={filteredYear}
           onChangeFilter={filterChangeHandler}
         />
+        <ExpensesList items={filteredExpenses} />
 
-        {expensesContent}
         {addOneMore}
 
         {/* <ExpenseItem

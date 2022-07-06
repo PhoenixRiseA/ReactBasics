@@ -49,55 +49,73 @@ const ExpenseForm = (props) => {
     setEnteredDate("");
     setEnteredLocation("");
   };
+  const [show, setShow] = useState(true);
 
   return (
-    <form onSubmit={submitHandler}>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
-          <label>Title</label>
-          <input
-            value={enteredTitle}
-            type="text"
-            name="title"
-            onChange={titleHandler}
-          />
-        </div>
-        <div className="new-expense__control">
-          <label>Amount</label>
-          <input
-            value={enteredAmount}
-            type="text"
-            name="amount"
-            onChange={amountHandler}
-            required
-          />
-        </div>
-        <div className="new-expense__control">
-          <label>Date</label>
-          <input
-            value={enteredDate}
-            type="date"
-            min="2019-01-01"
-            max="2022-12-31"
-            onChange={dateHandler}
-          />
-        </div>
-        <div className="new-expense__control">
-          <label>Location</label>
-          <input
-            value={enteredLocation}
-            type="text"
-            name="location"
-            onChange={locationHandler}
-          />
-        </div>
-        <div className="new-expense__actions">
-          <button id="addBtn" type="submit">
-            Add Exp
+    <div>
+      {show ? (
+        <form onSubmit={submitHandler}>
+          <div className="new-expense__controls">
+            <div className="new-expense__control">
+              <label>Title</label>
+              <input
+                value={enteredTitle}
+                type="text"
+                name="title"
+                onChange={titleHandler}
+              />
+            </div>
+            <div className="new-expense__control">
+              <label>Amount</label>
+              <input
+                value={enteredAmount}
+                type="text"
+                name="amount"
+                onChange={amountHandler}
+                required
+              />
+            </div>
+            <div className="new-expense__control">
+              <label>Date</label>
+              <input
+                value={enteredDate}
+                type="date"
+                min="2019-01-01"
+                max="2022-12-31"
+                onChange={dateHandler}
+              />
+            </div>
+            <div className="new-expense__control">
+              <label>Location</label>
+              <input
+                value={enteredLocation}
+                type="text"
+                name="location"
+                onChange={locationHandler}
+              />
+            </div>
+            <div className="new-expense__actions">
+              <button id="addBtn" type="submit">
+                Add Expense
+              </button>
+              <button
+                id="cancelBtn"
+                type="submit"
+                onClick={() => setShow(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+      ) : (
+        <div className="new-expense">
+          <button id="showForm" type="submit" onClick={() => setShow(true)}>
+            Add New Expense
           </button>
         </div>
-      </div>
-    </form>
+      )}
+    </div>
   );
 };
 
